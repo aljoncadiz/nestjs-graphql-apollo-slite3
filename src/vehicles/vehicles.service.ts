@@ -31,7 +31,7 @@ export class VehiclesService {
 		return this.driverService.findOne(driverId);
 	}
 
-	// async getVehiclesByDriverId(id: number): Promise<Vehicle[]> {
-	// 	return this.vehicleRepository.find({where: {driverId: id}});
-	// }
+	async getVehiclesByDriverId(id: number): Promise<Vehicle[]> {
+		return this.vehicleRepository.find({where: {driverId: id}});
+	}
  }

@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { forwardRef, Inject, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Vehicle } from 'src/vehicles/entities/vehicle.entity';
 import { VehiclesService } from 'src/vehicles/vehicles.service';
@@ -10,7 +10,8 @@ import { Driver } from './entities/driver.entity';
 @Injectable()
 export class DriversService {
 	constructor(
-		@InjectRepository(Driver) private driverRepository: Repository<Driver>
+		@InjectRepository(Driver) private driverRepository: Repository<Driver>,
+		@Inject(forwardRef(() => VehiclesService)) private readonly vehicleService: VehiclesService
 	){}
 
   create(createDriverInput: CreateDriverInput) {
@@ -32,5 +33,9 @@ export class DriversService {
 
   remove(id: number) {
     return `This action removes a #${id} driver`;
+  }
+
+  async getVehiclesByDriverId(id: number): Promise<Vehicle[]> {
+	  return this.vehicleService.getVehiclesByDriverId(id);
   }
 }

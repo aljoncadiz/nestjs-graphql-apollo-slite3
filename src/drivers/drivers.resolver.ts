@@ -1,8 +1,9 @@
-import { Resolver, Query, Mutation, Args, Int, Parent } from '@nestjs/graphql';
+import { Resolver, Query, Mutation, Args, Int, Parent, ResolveField } from '@nestjs/graphql';
 import { DriversService } from './drivers.service';
 import { Driver } from './entities/driver.entity';
 import { CreateDriverInput } from './dto/create-driver.input';
 import { UpdateDriverInput } from './dto/update-driver.input';
+import { Vehicle } from 'src/vehicles/entities/vehicle.entity';
 
 @Resolver(() => Driver)
 export class DriversResolver {
@@ -31,5 +32,10 @@ export class DriversResolver {
   @Mutation(() => Driver)
   removeDriver(@Args('id', { type: () => Int }) id: number) {
     return this.driversService.remove(id);
+  }
+
+  @ResolveField(returns => [Vehicle])
+  vehicles(@Parent() driver: Driver): Promise<Vehicle[]> {
+	return this.driversService.getVehiclesByDriverId(driver.id);
   }
 }
