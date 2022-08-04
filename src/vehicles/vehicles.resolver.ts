@@ -1,4 +1,5 @@
-import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
+import { Resolver, Query, Mutation, Args, Int, Parent, ResolveField } from '@nestjs/graphql';
+import { Driver } from 'src/drivers/entities/driver.entity';
 import { CreateVehicleInput } from './dto/create-vehicle-input';
 import { Vehicle } from './entities/vehicle.entity';
 import { VehiclesService } from './vehicles.service';
@@ -20,5 +21,10 @@ export class VehiclesResolver {
 	@Query(returns => Vehicle)
 	getVehicleById(@Args('id', {type: () => Int}) id: number): Promise<Vehicle> {
 		return this.vehicleService.findOne(id);
+	}
+
+	@ResolveField(returns => Driver)
+	driver(@Parent() vehicle: Vehicle): Promise<Driver> {
+		return this.vehicleService.getDriver(vehicle.driverId);
 	}
 }

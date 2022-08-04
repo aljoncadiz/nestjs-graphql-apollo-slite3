@@ -1,5 +1,4 @@
 import { Field, Int, ObjectType } from "@nestjs/graphql";
-import { type } from "os";
 import { Driver } from "src/drivers/entities/driver.entity";
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 

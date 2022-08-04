@@ -1,5 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { Vehicle } from 'src/vehicles/entities/vehicle.entity';
+import { VehiclesService } from 'src/vehicles/vehicles.service';
 import { Repository } from 'typeorm';
 import { CreateDriverInput } from './dto/create-driver.input';
 import { UpdateDriverInput } from './dto/update-driver.input';
@@ -7,7 +9,9 @@ import { Driver } from './entities/driver.entity';
 
 @Injectable()
 export class DriversService {
-	constructor(@InjectRepository(Driver) private driverRepository: Repository<Driver>){}
+	constructor(
+		@InjectRepository(Driver) private driverRepository: Repository<Driver>
+	){}
 
   create(createDriverInput: CreateDriverInput) {
     const newDriver = this.driverRepository.create(createDriverInput);

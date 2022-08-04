@@ -1,4 +1,4 @@
-import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
+import { Resolver, Query, Mutation, Args, Int, Parent } from '@nestjs/graphql';
 import { DriversService } from './drivers.service';
 import { Driver } from './entities/driver.entity';
 import { CreateDriverInput } from './dto/create-driver.input';

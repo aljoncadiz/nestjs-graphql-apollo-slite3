@@ -14,7 +14,7 @@ export class Driver {
 	@Field()
 	name: string
 	
-	@OneToMany(() => Vehicle, Vehicle => Vehicle.driver)
+	@OneToMany(() => Vehicle, vehicle => vehicle.driver)
 	@Field(type => [Vehicle], {nullable: true})
 	vehicles?: Vehicle[]
 }

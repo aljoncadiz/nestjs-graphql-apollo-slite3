@@ -1,4 +1,4 @@
-import { Field, InputType } from "@nestjs/graphql";
+import { Field, InputType, Int } from "@nestjs/graphql";
 import { IsAlpha } from "class-validator";
 
 @InputType()
@@ -19,4 +19,7 @@ export class CreateVehicleInput {
 
 	@Field({nullable: true})
 	description?: string;
+
+	@Field(type => Int)
+	driverId: number
 }
