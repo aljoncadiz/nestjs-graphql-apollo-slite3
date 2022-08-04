@@ -1,0 +1,15 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Vehicle {
+  id: Int!
+  vin: String!
+  make: String!
+  year: String!
+  model: String!
+}
+
+type Query {
+  vehicles: [Vehicle!]!
+}
