@@ -2,6 +2,12 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type Driver {
+  id: Int!
+  name: String!
+  vehicles: [Vehicle!]
+}
+
 type Vehicle {
   id: Int!
   vin: String!
@@ -9,14 +15,22 @@ type Vehicle {
   year: String!
   model: String!
   description: String
+  driverId: Int!
+  driver: Driver!
 }
 
 type Query {
   vehicles: [Vehicle!]!
+  getVehicleById(id: Int!): Vehicle!
+  drivers: [Driver!]!
+  driver(id: Int!): Driver!
 }
 
 type Mutation {
   createVehicle(createVehicleInput: CreateVehicleInput!): Vehicle!
+  createDriver(createDriverInput: CreateDriverInput!): Driver!
+  updateDriver(updateDriverInput: UpdateDriverInput!): Driver!
+  removeDriver(id: Int!): Driver!
 }
 
 input CreateVehicleInput {
@@ -25,4 +39,13 @@ input CreateVehicleInput {
   year: String!
   model: String!
   description: String
+}
+
+input CreateDriverInput {
+  name: String!
+}
+
+input UpdateDriverInput {
+  name: String
+  id: Int!
 }

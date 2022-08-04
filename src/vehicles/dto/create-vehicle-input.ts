@@ -4,7 +4,7 @@ import { IsAlpha } from "class-validator";
 @InputType()
 export class CreateVehicleInput {
 
-	@IsAlpha()
+	// @IsAlpha()
 	@Field()
 	vin: string;
 

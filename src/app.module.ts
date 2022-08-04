@@ -6,6 +6,7 @@ import { join } from 'path';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { VehiclesModule } from './vehicles/vehicles.module';
+import { DriversModule } from './drivers/drivers.module';
 
 @Module({
   controllers: [AppController],
@@ -22,6 +23,7 @@ import { VehiclesModule } from './vehicles/vehicles.module';
 		synchronize: true,
 	}),
     VehiclesModule,
+    DriversModule,
   ],
 })
 export class AppModule {}

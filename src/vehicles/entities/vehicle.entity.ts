@@ -1,5 +1,7 @@
 import { Field, Int, ObjectType } from "@nestjs/graphql";
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { type } from "os";
+import { Driver } from "src/drivers/entities/driver.entity";
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 @ObjectType()
@@ -28,4 +30,12 @@ export class Vehicle {
 	@Column({nullable: true})
 	@Field({nullable: true})
 	description?: string;
+
+	@Column()
+	@Field(type => Int)
+	driverId: number;
+
+	@ManyToOne(() => Driver, driver => driver.vehicles)
+	@Field(type => Driver)
+	driver: Driver
 }
