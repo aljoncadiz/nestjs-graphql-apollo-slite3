@@ -1,19 +1,25 @@
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 import { CreateDriverInput } from './dto/create-driver.input';
 import { UpdateDriverInput } from './dto/update-driver.input';
+import { Driver } from './entities/driver.entity';
 
 @Injectable()
 export class DriversService {
+	constructor(@InjectRepository(Driver) private driverRepository: Repository<Driver>){}
+
   create(createDriverInput: CreateDriverInput) {
-    return 'This action adds a new driver';
+    const newDriver = this.driverRepository.create(createDriverInput);
+	return this.driverRepository.save(newDriver);
   }
 
   findAll() {
-    return `This action returns all drivers`;
+    return this.driverRepository.find();
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} driver`;
+    return this.driverRepository.findOneOrFail({where: {id: id}});
   }
 
   update(id: number, updateDriverInput: UpdateDriverInput) {
